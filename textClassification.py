@@ -10,25 +10,24 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 data = pd.read_csv("dataTitanic/titanic.csv")
 print(data.info())
 
-# rijen met nulvalues verwijderen of gokken -> eerste poging met verwijderen
 
+# delete or replace null values in row -> first try: delete
 data.dropna(axis=0, subset=["age", "embarked", "fare"], inplace=True)
 data.replace({'sex': {'male': 0, 'female': 1}}, inplace=True)
 
 
-# nuttige features zijn survived, Sex, Age, Fare, SibSp (hoeveelheid echtgenoten broers en zussen aan boord), Parch (hoeveelheid ouders/kinderen aan boord), Pclass (indicatie van sociale klasse -> 1 is hoogste, 3 laagste)
-# alle de rest effe droppen
-
+# useful features are survived, sex, age, fare, sibsp (number of spouses, siblings on board), parch (number of parents, children on board), pclass (indication of social class -> 1 is highest, 3 lowest)
+# drop the rest of the features for now
 data.drop(columns=["name", "ticket", "cabin", "embarked", "boat", "body", "home.dest"], inplace=True)
 
 
-# corr matrix maken
+# making a correlation matrix to see which features are most important
 corr_matrix = data[["survived", "sex", "pclass", "parch", "fare"]].corr()
 plt.figure(figsize=(10, 7))
 sns.heatmap(corr_matrix, annot=True, linewidths=0.5, fmt=".2f", cmap="YlGnBu")
 plt.show()
 
-# dataTitanic visualisatie
+# dataTitanic visualisation
 fare_bins = [0, 20, 50, 100, 200, 1000]
 fare_labels = ['0-20', '20-50', '50-100', '100-200', '200+']
 fareGroup = pd.cut(data['fare'], bins=fare_bins, labels=fare_labels, right=False)
