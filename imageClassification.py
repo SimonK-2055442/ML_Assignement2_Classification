@@ -1,25 +1,13 @@
 import os
 import random
-import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
-import seaborn as sns
 import tensorflow as tf
 from tensorflow import keras
-from keras import layers, models
-from keras.preprocessing import image
 from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
-from keras.layers import Conv2D, Flatten, MaxPooling2D, Dense, Dropout, GlobalAveragePooling2D
-from keras import optimizers, losses
-
-# System libraries
-from pathlib import Path
+from keras.layers import Flatten, Dense, Dropout
 import os.path
-
-# Metrics
-import itertools
 
 
 # Function to check if a model file exists
